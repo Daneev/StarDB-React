@@ -1,0 +1,5 @@
+.list-group.list-item {
+  background-color: #1e424a;
+  width: 45%;
+  cursor: pointer;
+}
