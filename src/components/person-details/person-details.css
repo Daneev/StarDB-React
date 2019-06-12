@@ -1,0 +1,12 @@
+.card.person {
+  margin-left: 5%;
+  width: 45%;
+}
+
+.person-img {
+  display: block;
+  max-width: 15rem;
+  max-height: 15rem;
+  width: auto;
+  height: auto;
+}

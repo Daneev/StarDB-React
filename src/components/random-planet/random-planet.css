@@ -1,0 +1,20 @@
+
+.card.panel {
+  margin: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.planet-img {
+  display: block;
+  max-width: 15rem;
+  max-height: 15rem;
+  width: auto;
+  height: auto;
+}
+
+.list-group.panel-list {
+  width: 80%;
+  margin-left: 5%;
+  height: 10rem;
+}
