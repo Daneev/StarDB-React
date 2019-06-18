@@ -1,8 +1,12 @@
 import React, {Component} from 'react'
 import {ItemList} from '../item-list/item-list'
 import {PersonDetails} from '../person-details/person-details'
+import { SwapiService } from './../../services/swapi-service';
+import { Row } from './../row/row';
 
 export class PeoplePage extends Component {
+  swapi = new SwapiService();
+
   state = {
     hasError: false
   };
@@ -21,11 +25,17 @@ export class PeoplePage extends Component {
     if (this.state.hasError) {
       return <span>error</span>;
     }
+
+  const itemList = (<ItemList
+    onItemSelected = {this.onPersonSelected}
+    getData = {this.swapi.getPioplesAll}
+    renderItem = {({name, birthYear}) => `${name} - ${birthYear}`}
+    />
+  )
+  const personDetails = (<PersonDetails selectPerson={this.props.selectPerson} />)
+
     return(
-      <React.Fragment>
-        <ItemList onItemSelected = {this.onPersonSelected}/>
-        <PersonDetails selectPerson = {this.props.selectPerson}/>
-      </React.Fragment>
+      <Row left = {itemList} right = {personDetails} />
     )
   }
 }
