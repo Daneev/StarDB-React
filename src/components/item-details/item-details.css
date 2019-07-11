@@ -3,10 +3,12 @@
   width: 45%;
 }
 
+
 .person-img {
   display: block;
-  max-width: 15rem;
-  max-height: 15rem;
+  /* max-width: 15rem; */
+  max-height: 13rem;
   width: auto;
   height: auto;
 }
+

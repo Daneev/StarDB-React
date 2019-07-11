@@ -50,8 +50,8 @@ export class SwapiService {
     return this.baseIMG + `planets/${id}.jpg`
   }
   _extractID = (item) => {
-    const regExp = /\/([0-9]+)\/$/;
-    const id = item.url.match(regExp)[1];
+    const regExp = /\d+/;
+    const id = item.url.match(regExp);
     return id;
   }
 

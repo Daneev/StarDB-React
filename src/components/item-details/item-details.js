@@ -1,64 +1,66 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './item-details.css';
 import { Spinner } from '../spinner/spinner';
 
-export const Records = ({item, field, label}) => {
+export const Records = ({ item, field, label }) => {
 
- return <li className="list-group-item"><span>{label}{item[field]}</span></li>
+  return <li className="list-group-item"><span>{label}{item[field]}</span></li>
 }
 
 
 
 export class ItemDetails extends Component {
-  // swapi = new SwapiService()
 
   state = {
     item: null,
     image: null
   }
 
- componentDidMount() {
+  componentDidMount() {
     this.updateItem();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.selectItemID !==prevProps.selectItemID){
+    if (this.props.itemId !== prevProps.itemId) {
       this.updateItem()
     }
   }
 
-  updateItem(){
-    const {selectItemID, getData, getImageURL} = this.props;
-    console.log("TCL: PersonDetails -> updatePerson -> id", selectItemID)
-    if (!selectItemID) {return;};
+  updateItem() {
+    const { itemId, getData, getImageURL } = this.props;
+    console.log("TCL: PersonDetails -> updatePerson -> id", itemId)
+    if (!itemId) { return; };
 
-    getData(selectItemID)
-    .then((item) =>{
-    console.log("TCL: PersonDetails -> updatePerson -> person", item);
-    this.setState({
-      item,
-      image: getImageURL(item)//  =  this.swapi.getPersonImage(item)
-    })})
+    getData(itemId)
+      .then((item) => {
+        console.log("TCL: PersonDetails -> updatePerson -> person", item);
+        this.setState({
+          item,
+          image: getImageURL(item)
+        })
+      })
   }
 
 
-  render(){
-    const {item, image} = this.state;
+  render() {
+    const { item, image } = this.state;
     if (!item) {
-      return <Spinner/>;
+      return <Spinner />;
     }
-    const {name, gender, birthYear, height, mass, skinColor} = item;
+    const { name } = item;
     return (
       <div className="card person shadow">
-          <h4 className="card-title m-2">{name}</h4>
-      <div className="card-body d-flex justify-content-around"><img src={image} className="person-img" alt=''/>
-      </div>
-      <ul className="list-group list-group-flush">
+        <h4 className="card-title m-2">{name}</h4>
+        <div className="card-body d-flex justify-content-around"><img src={image} className="person-img" alt='' />
+        </div>
+        <ul className="list-group list-group-flush">
           {
-            React.Children.map(this.props.children, (child)=>{
-              return React.cloneElement(child, {item})})
+            React.Children.map(this.props.children, (child) => {
+              return React.cloneElement(child, { item })
+            })
           }
-      </ul>
-    </div>
-    )}
+        </ul>
+      </div>
+    )
+  }
 }

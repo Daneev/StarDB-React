@@ -1,36 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css'
 import {Header} from '../header/header'
 import {RandomPlanet} from '../random-planet/random-planet'
-import {PeoplePage} from '../people-page/people-page'
-import { SwapiService } from './../../services/swapi-service';
-
-export class App extends Component {
-  swapi = new SwapiService();
-
-  state = {
-    selectItemID: 5
-  }
-
-  onItemSelected = (id)=>{
-  console.log("TCL: App -> onPersonSelected -> id", id)
-
-    this.setState({
-      selectItemID: id
-    })
-  }
+import {PeoplePage} from '../pages/people-page'
+import { PlanetPage } from '../pages/planet-page'
+import { StarshipPage } from '../pages/starship-page'
+import { ErrorBoundry } from './../error-boundry/error-boundry';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 
-  render(){
+
+export const App = () => {
   return (
-    <div>
-      <Header/>
-      <RandomPlanet/>
-        <div className="d-flex justify-content-between panel-bottom">
-          <PeoplePage
-          onItemSelected = {this.onItemSelected}
-          selectItemID = {this.state.selectItemID}/>
+    <ErrorBoundry>
+      <Router>
+        <div>
+          <Header/>
+          <RandomPlanet/>
+            <div className="d-flex flex-wrap justify-content-between panel-bottom">
+              <Route path="/people" component = {PeoplePage}/>
+              <Route path="/planets" component={PlanetPage}/>
+              <Route path="/starships" component={StarshipPage}/>
+            </div>
         </div>
-    </div>
-  )}
+      </Router>
+    </ErrorBoundry>
+  )
 }
